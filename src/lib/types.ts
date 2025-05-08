@@ -39,19 +39,3 @@ export interface ProductItem {
   family: 'wisblock' | 'wisgate' | 'wisnode' | 'meshtastic';
   featured?: boolean;
 }
-
-export interface CalendarEvent {
-  id: string;
-  title: string;
-  description: string;
-  date: Date;
-  department: Department | 'all';
-  organizer: string;
-}
-
-export interface User {
-  id?: string;
-  fullName?: string;
-  email: string;
-  department?: Department;
-}
