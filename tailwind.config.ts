@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,31 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// RAK colors
+				rak: {
+					gray: '#8E9196',
+					blue: '#0086FF',
+					orange: '#FF9A00',
+					purple: '#9C27B0',
+					green: '#62C555',
+					red: '#FF5252',
+				},
+				wisblock: {
+					primary: '#FF9A00',
+					secondary: '#E58900',
+				},
+				wisgate: {
+					primary: '#9C27B0',
+					secondary: '#7E1C91',
+				},
+				wisnode: {
+					primary: '#0086FF',
+					secondary: '#0065C0',
+				},
+				meshstastic: {
+					primary: '#62C555',
+					secondary: '#4FA247',
 				}
 			},
 			borderRadius: {
@@ -89,6 +115,9 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
+			},
+			fontFamily: {
+				sans: ['-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'sans-serif'],
 			}
 		}
 	},
