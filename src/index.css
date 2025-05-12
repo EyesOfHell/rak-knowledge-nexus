@@ -102,10 +102,18 @@
   }
   
   .section-heading {
-    @apply text-2xl font-semibold mb-6 text-gray-900;
+    @apply text-2xl font-semibold mb-6 text-foreground;
   }
 }
 
+/* Smooth transitions for theme switching */
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Button animations */
 .card-hover-effect {
   @apply transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-[1.02];
 }
@@ -119,5 +127,40 @@
 }
 
 .search-bar-container input {
-  @apply w-full py-3 px-5 rounded-full shadow-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+  @apply w-full py-3 px-5 rounded-full shadow-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300;
+}
+
+/* Theme transition animations */
+html {
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+body * {
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Button animations */
+button, a {
+  @apply transition-all duration-200;
+}
+
+button:active:not(:disabled), a:active {
+  transform: scale(0.97);
+}
+
+/* Calendar event highlight */
+.hasEvent {
+  position: relative;
+}
+
+.hasEvent::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: hsl(var(--primary));
 }
