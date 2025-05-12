@@ -1,11 +1,20 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, Calendar, LogOut, Menu } from 'lucide-react';
+import { Search, Calendar, LogOut, Menu, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { useAuth } from '@/context/AuthContext';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuLabel, 
+  DropdownMenuSeparator, 
+  DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,6 +33,17 @@ const Header = () => {
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+
+  // Get user initials for avatar
+  const getInitials = () => {
+    if (!user?.fullName) return 'U';
+    return user.fullName
+      .split(' ')
+      .map(name => name[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
   };
 
   return (
@@ -100,15 +120,30 @@ const Header = () => {
             Support
           </Link>
           <ThemeToggle />
+          
           {user && (
-            <Button 
-              variant="ghost" 
-              onClick={handleLogout}
-              className="transition-all duration-200 hover:scale-105"
-            >
-              <LogOut className="mr-2 h-4 w-4" />
-              Logout
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full transition-all duration-200 hover:scale-105">
+                  <Avatar className="h-8 w-8 transition-all duration-200">
+                    <AvatarFallback className="bg-primary text-primary-foreground text-sm">
+                      {getInitials()}
+                    </AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 mt-1">
+                <DropdownMenuLabel>
+                  <div className="font-medium text-base">{user.fullName}</div>
+                  <div className="text-xs text-muted-foreground capitalize">{user.department} Department</div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
         </nav>
       </div>

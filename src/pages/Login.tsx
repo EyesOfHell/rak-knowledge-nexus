@@ -1,12 +1,16 @@
 
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+
+interface LocationState {
+  from?: string;
+}
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +19,11 @@ const Login = () => {
   const { login } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state as LocationState;
+  
+  // Get the page the user was trying to visit
+  const from = state?.from || "/";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +36,8 @@ const Login = () => {
           title: "Login successful",
           description: "Welcome back to RAK Knowledge Hub",
         });
-        navigate("/");
+        // Redirect the user to the page they were trying to visit
+        navigate(from);
       } else {
         toast({
           title: "Login failed",

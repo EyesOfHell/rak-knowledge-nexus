@@ -219,9 +219,9 @@ const Calendar = () => {
                   <Card key={event.id} className="overflow-hidden border transition-all duration-200 hover:shadow-md">
                     <CardContent className="p-4 relative">
                       <div className={`absolute top-0 left-0 w-1 h-full 
-                        ${event.department === "engineering" ? "bg-rak-blue" : 
-                          event.department === "marketing" ? "bg-rak-orange" : 
-                          event.department === "support" ? "bg-rak-purple" : "bg-rak-green"}
+                        ${event.department === "engineering" ? "bg-blue-500" : 
+                          event.department === "marketing" ? "bg-orange-500" : 
+                          event.department === "support" ? "bg-purple-500" : "bg-green-500"}
                       `} />
                       
                       <div className="ml-2">
